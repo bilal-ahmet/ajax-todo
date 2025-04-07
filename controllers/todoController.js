@@ -1,3 +1,4 @@
+
 let todos = [];
 
 exports.getTodos = (req, res) => {
@@ -11,14 +12,13 @@ exports.fetchTodos = (req, res) => {
 exports.addTodos = (req, res) => {
   const { task } = req.body;
 
-  if (!task) {
-    return res.status(400).json({ error: "Task is required" });
-  } else {
+  if (!task) return res.status(400).json({ error: "Task is required" });
+    
     const newTodo = {
       id: Date.now(),
       task,
     };
-  }
+  
 
   todos.push(newTodo);
   res.json(newTodo);

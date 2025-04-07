@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const todoTouter = require('./routes/todoRoute');
+const todoRoute = require('./routes/todoRoute');
 
 const app = express();
 
@@ -14,9 +14,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // routes
-app.get('/', todoTouter);
+app.get('/', todoRoute);
 
 //server
 app.listen(3000, () => {
-    console.log('server 300 portunda çalışıyor');
+    console.log('server 3000 portunda çalışıyor');
 });

@@ -1,25 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Ajax Todo App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="container mt-5">
-        <h2 class="mb-4">Ajax Todo App</h2>
+      <h2 class="mb-4">Ajax Todo App</h2>
 
-        <form id="todo-form">
-            <div class="form-group">
-                <input type="text" id="task-input" class="form-control" placeholder="Yeni görev yaz...">
-            </div>
-            <button class="btn btn-primary" type="submit">Ekle</button>
-        </form>
+      <form id="todo-form">
+        <div class="form-group">
+          <input
+            type="text"
+            id="task-input"
+            class="form-control"
+            placeholder="Yeni görev yaz..."
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Ekle</button>
+      </form>
 
-        <ul id="todo-list" class="list-group mt-4"></ul>
+      <ul id="todo-list" class="list-group mt-4"></ul>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/main.js"></script>
-</body>
+
+    <!-- Toast Container -->
+    <div
+      id="toast-container"
+      class="position-fixed bottom-0 end-0 p-3"
+      style="z-index: 9999"
+    ></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Todo form submit
+        $('#todo-form').submit(function (event) {
+          event.preventDefault(); // Sayfa yenilemesini engelle
+
+          const task = $('#task-input').val();
+          if (task.trim() === '') {
+            alert('Lütfen bir görev girin');
+            return;
+          }
+
+          // Ajax isteği gönder
+          $.ajax({
+            url: '/todo', // Sunucuya göndereceğiniz URL
+            method: 'POST',
+            data: { task },
+            success: function (response) {
+              // Görev başarıyla eklendiyse, listeyi güncelle
+              $('#todo-list').append(
+                `<li class="list-group-item">${task}</li>`
+              );
+              $('#task-input').val(''); // Inputu temizle
+              showToast('Görev başarıyla eklendi!', 'success');
+            },
+            error: function () {
+              showToast('Bir hata oluştu', 'danger');
+            },
+          });
+        });
+      });
+
+      // Toast mesajlarını göstermek için yardımcı fonksiyon
+      function showToast(message, type) {
+        const toast = `<div class="toast align-items-center text-bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              ${message}
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>`;
+        $('#toast-container').append(toast);
+        const toastElement = $('#toast-container .toast').last()[0];
+        const bsToast = new bootstrap.Toast(toastElement);
+        bsToast.show();
+      }
+    </script>
+  </body>
 </html>

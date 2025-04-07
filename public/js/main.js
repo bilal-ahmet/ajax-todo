@@ -12,6 +12,7 @@ $(document).ready(function () {
             $('#task-input').val('');
             appendTodo(newTodo);
         });
+        console.log('submit, görev ekleme kısmı çalıştı');
     });
 
     // Listeleme
@@ -19,6 +20,7 @@ $(document).ready(function () {
         $.get('/api/todos', function (todos) {
             $('#todo-list').empty();
             todos.forEach(todo => appendTodo(todo));
+            console.log('fetchTodo kısmı çalıştı');
         });
     }
 
@@ -30,6 +32,7 @@ $(document).ready(function () {
                 <button class="btn btn-danger btn-sm delete-btn" data-id="${todo.id}">Sil</button>
             </li>
         `);
+        console.log('appendedTodo kısmı çalıştı');
     }
 
     // Silme
@@ -48,6 +51,7 @@ $(document).ready(function () {
                 showToast('Silme işlemi başarısız ❌');
             }
         });
+        console.log('delete kısmı çalıştı');
     });
 
     // Toast mesajı
@@ -64,4 +68,5 @@ $(document).ready(function () {
         const bsToast = new bootstrap.Toast(toast[0]);
         bsToast.show();
     }
+    console.log('toast kısmı çalıştı');
 });

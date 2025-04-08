@@ -8,6 +8,45 @@
       rel="stylesheet"
     />
   </head>
+  <div
+    class="modal fade"
+    id="editModal"
+    tabindex="-1"
+    aria-labelledby="editModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <form id="edit-form" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Görevi Düzenle</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Kapat"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="edit-id" />
+          <div class="mb-3">
+            <label for="edit-task" class="form-label">Görev</label>
+            <input type="text" class="form-control" id="edit-task" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            İptal
+          </button>
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <body>
     <div class="container mt-5">
       <h2 class="mb-4">Ajax Todo App</h2>
@@ -42,30 +81,30 @@
     <script>
       $(document).ready(function () {
         // Todo form submit
-        $('#todo-form').submit(function (event) {
+        $("#todo-form").submit(function (event) {
           event.preventDefault(); // Sayfa yenilemesini engelle
 
-          const task = $('#task-input').val();
-          if (task.trim() === '') {
-            alert('Lütfen bir görev girin');
+          const task = $("#task-input").val();
+          if (task.trim() === "") {
+            alert("Lütfen bir görev girin");
             return;
           }
 
           // Ajax isteği gönder
           $.ajax({
-            url: '/api/todos/', // Sunucuya göndereceğiniz URL
-            method: 'POST',
+            url: "/api/todos/", // Sunucuya göndereceğiniz URL
+            method: "POST",
             data: { task },
             success: function (response) {
               // Görev başarıyla eklendiyse, listeyi güncelle
-              $('#todo-list').append(
+              $("#todo-list").append(
                 `<li class="list-group-item">${task}</li>`
               );
-              $('#task-input').val(''); // Inputu temizle
-              showToast('Görev başarıyla eklendi!', 'success');
+              $("#task-input").val(""); // Inputu temizle
+              showToast("Görev başarıyla eklendi!", "success");
             },
             error: function () {
-              showToast('Bir hata oluştu', 'danger');
+              showToast("Bir hata oluştu", "danger");
             },
           });
         });
@@ -81,8 +120,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
         </div>`;
-        $('#toast-container').append(toast);
-        const toastElement = $('#toast-container .toast').last()[0];
+        $("#toast-container").append(toast);
+        const toastElement = $("#toast-container .toast").last()[0];
         const bsToast = new bootstrap.Toast(toastElement);
         bsToast.show();
       }

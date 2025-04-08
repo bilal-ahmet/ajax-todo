@@ -28,6 +28,19 @@ exports.addTodos = (req, res) => {
   res.json(newTodo);
 };
 
+exports.updateTodo = (req, res) => {
+  const id = parseInt(req.params.id);
+  const { task } = req.body;
+
+  const index = todos.findIndex(todo => todo.id ===id);
+  if(index === -1){
+    return res.status(404).json({error: 'todo not found'});
+  }
+
+  todos[index].task = task;
+  res.json(todos[index]);
+}
+
 exports.deleteTodos = (req, res) => {
   const id = parseInt(req.params.id);
   const todoIndex = todos.findIndex((todo) => todo.id === id);

@@ -1,11 +1,5 @@
 const {Sequelize} = require('sequelize');
 
-const User = require('./user');
-const Todo = require('./Todo');
-
-User.hasMany(Todo, {foreignKey: userID, onDelete: 'CASCADE'});
-Todo.belongsTo(User, {foreignKey: userID});
-
 const sequelize = new Sequelize('ajaxDB', 'sa', 'Kolsan123', {
     host: 'localhost',
     dialect: 'mssql',
@@ -19,5 +13,13 @@ const sequelize = new Sequelize('ajaxDB', 'sa', 'Kolsan123', {
     logging: false
 });
 
+const User = require('./User');
+const Todo = require('./Todo');
 
-module.exports = sequelize;
+User.hasMany(Todo, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Todo.belongsTo(User, { foreignKey: 'userId' });
+
+
+module.exports = {
+    sequelize
+};

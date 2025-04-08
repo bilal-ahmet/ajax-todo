@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const todoRoute = require('./routes/todoRoute');
 const sequelize = require('./models');
-const {ensureTestUser, ensureTestUser} = require('./controllers/todoController');
+const {ensureTestUser} = require('./controllers/todoController');
 
 const app = express();
 

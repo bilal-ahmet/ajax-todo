@@ -8,6 +8,10 @@ const Todo = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    userID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   },
   {
     tableName: "Todos",

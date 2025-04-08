@@ -53,7 +53,7 @@
 
           // Ajax isteği gönder
           $.ajax({
-            url: '/todo', // Sunucuya göndereceğiniz URL
+            url: '/api/todos/', // Sunucuya göndereceğiniz URL
             method: 'POST',
             data: { task },
             success: function (response) {

@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // routes
-app.get('/', todoRoute);
+app.use('/', todoRoute);
 
 //server
 app.listen(3000, () => {

@@ -15,6 +15,26 @@ $(document).ready(function () {
         console.log('submit, görev ekleme kısmı çalıştı');
     });
 
+/*     $('#todo-form').submit(function (e) {
+        e.preventDefault();
+        const task = $('#task-input').val();
+        if (!task) return;
+
+        $.post('/api/todos', { task })
+            .done(function (newTodo) {
+                $('#task-input').val('');
+                appendTodo(newTodo);
+            })
+            .fail(function (err) {
+                if (err.responseJSON && err.responseJSON.error) {
+                    showToast(err.responseJSON.error);
+                } else {
+                    showToast('Bir hata oluştu ❌');
+                }
+            });
+        console.log('submit, görev ekleme kısmı çalıştı');
+    }); */
+
     // Listeleme
     function fetchTodos() {
         $.get('/api/todos', function (todos) {

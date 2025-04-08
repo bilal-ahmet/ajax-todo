@@ -1,7 +1,7 @@
 const {Sequelize} = require('sequelize');
 
 const sequelize = new Sequelize('ajaxDB', 'sa', 'Kolsan123', {
-    host: localhost,
+    host: 'localhost',
     dialect: 'mssql',
     dialectModule: require('tedious'),
     dialectOptions: {

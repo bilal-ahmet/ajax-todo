@@ -16,11 +16,11 @@ exports.addTodos = async (req, res) => {
 
   if (!task) return res.status(400).json({ error: "Task is required" });
 
-  // Check for duplicate tasks
+/*   // Check for duplicate tasks
   const isDuplicate = todos.some((todo) => todo.task === task);
   if (isDuplicate) {
     return res.status(400).json({ error: "Task already exists" });
-  }
+  } */
 
   const newTodo = await Todo.create({ task });
   res.json(newTodo);

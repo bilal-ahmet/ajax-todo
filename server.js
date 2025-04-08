@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const todoRoute = require('./routes/todoRoute');
+const sequelize = require('./models');
 
 const app = express();
 
@@ -20,3 +21,10 @@ app.use('/', todoRoute);
 app.listen(3000, () => {
     console.log('server 3000 portunda çalışıyor');
 });
+
+
+sequelize.sync().then(() => {
+    console.log('db senkronize edildi');
+}).catch((err) => {
+    console.loh('db senkronize edilmedi', err);
+})
